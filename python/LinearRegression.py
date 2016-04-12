@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 03 13:01:18 2016
+# @Author: WuLC
+# @Date:   2016-04-03 13:03:24
+# @Last modified by:   WuLC
+# @Last Modified time: 2016-04-12 14:08:42
+# @Email: liangchaowu5@gmail.com
+# @Function: linear regression with gradient descent of two methods: batch gradient descent and stochastic gradient descent 
+# @Referer: http://stackoverflow.com/questions/17784587/gradient-descent-using-python-and-numpy
 
-@author: LC
-@Function: linear regression with gradient descent of two methods: batch gradient descent and stochastic gradient descent 
-@Referer: http://stackoverflow.com/questions/17784587/gradient-descent-using-python-and-numpy
-"""
 
 from sklearn.linear_model import SGDClassifier
 import numpy as np
 import random
 
 def batchGradientDescent(x,y,theta,alpha):
-    """
-    batch gradient descent for linear regression
+    """batch gradient descent for linear regression
     
     @parms x: input of independent variables
     @parms y: input dependent variables
@@ -37,8 +37,7 @@ def batchGradientDescent(x,y,theta,alpha):
     return recurseCount,theta
     
 def stochasticGradientDescent(x,y,theta,alpha):
-    """
-    stochastic gradient descent for linear regression
+    """stochastic gradient descent for linear regression
     
     @parms x: input of independent variables
     @parms y: input dependent variables
