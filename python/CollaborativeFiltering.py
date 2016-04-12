@@ -2,7 +2,7 @@
 # @Author: WuLC
 # @Date:   2016-04-12 15:53:02
 # @Last modified by:   WuLC
-# @Last Modified time: 2016-04-12 19:42:16
+# @Last Modified time: 2016-04-12 20:26:32
 # @Email: liangchaowu5@gmail.com
 # @Function: implementation of User-based collaborative filetering 
 # @Referer: chaper 2 of the book 《programming-collective-intelligence》
@@ -127,7 +127,7 @@ def user_similarity_on_pearson(scores, user1, user2):
     return modified_cosine_similarity 
 
 
-def find_similar_users(scores,user,similar_function = user_similarity_on_cosine):
+def find_similar_users(scores,user,similar_function = user_similarity_on_modified_cosine):
     """find similar users based on the similar-function defined above
     
     Args:
@@ -178,7 +178,7 @@ def recommend_item(scores,user):
  
 
 if __name__ == '__main__':
-    '''
+    
     similarList = find_similar_users(critics, 'Lisa Rose')
     for i in similarList:
         print i
@@ -186,4 +186,4 @@ if __name__ == '__main__':
     item_score = recommend_item(critics,'Lisa Rose')
     for i,j in item_score:
         print i,j
-    
+    '''

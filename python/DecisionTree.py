@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: LC
 # @Date:   2016-04-08 15:26:49
-# @Last modified by:   LC
-# @Last Modified time: 2016-04-12 15:50:47
+# @Last modified by:   WuLC
+# @Last Modified time: 2016-04-12 20:29:36
 # @Email: liangchaowu5@gmail.com
 # @Function:implementation of decision tree described in programming-collective-intelligence in chapter 7
 # @Referer: chapter 7 in book 《programming-collective-intelligence》
@@ -35,7 +35,6 @@ class DecisionTreeNode:
 
 
 def divid_set(rows, col, value):
-
     """divide the rows into two set according to the value of column col
 
     Args:
