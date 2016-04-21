@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: WuLC
 # @Date:   2016-04-03 13:03:24
-# @Last modified by:   WuLC
-# @Last Modified time: 2016-04-12 14:08:42
+# @Last modified by:   LC
+# @Last Modified time: 2016-04-12 20:48:48
 # @Email: liangchaowu5@gmail.com
 # @Function: linear regression with gradient descent of two methods: batch gradient descent and stochastic gradient descent 
 # @Referer: http://stackoverflow.com/questions/17784587/gradient-descent-using-python-and-numpy

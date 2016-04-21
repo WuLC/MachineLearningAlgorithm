@@ -2,7 +2,7 @@
 # @Author: LC
 # @Date:   2016-04-08 15:26:49
 # @Last modified by:   WuLC
-# @Last Modified time: 2016-04-12 20:29:36
+# @Last Modified time: 2016-04-21 14:41:10
 # @Email: liangchaowu5@gmail.com
 # @Function:implementation of decision tree described in programming-collective-intelligence in chapter 7
 # @Referer: chapter 7 in book 《programming-collective-intelligence》
@@ -105,7 +105,7 @@ def entropy(rows):
     """get the entropy of rows 
     
     Args:
-        rows (TYPE): rows to be caculated about their entropy
+        rows (list[list]): rows to be caculated the about their entropy
     
     Returns:
         float: entropy of the rows 
@@ -119,7 +119,21 @@ def entropy(rows):
         ent -= p*log(p, 2)
     return ent
 
-
+def variance(rows):
+    """get the variance of the rows when the type is number
+    
+    Args:
+        rows(list[list]): rows to be caculated their variance
+    
+    Returns:
+        variance of the row in terms of the last row 
+    """
+    s = sum(row[-1] for row in rows)
+    mean = s/len(rows)
+    pow_sum = sum(pow(row[-1]-mean,2) for row in rows)
+    variance = pow_sum/len(rows)
+    reuturn variance
+    
 def build_tree(rows):
     """build the decision of the rows in the metric of entropy
     
@@ -240,8 +254,46 @@ def prune(tree, mini_entropy):
             prune(tree.fb, mini_entropy)
 
 
+def mdclassfy(tree,observation):
+    """classfy observation  with some missing data
+    
+    Args:
+        tree (TYPE): root of decision tree
+        observation (TYPE): new observation to be classfied
+    
+    Returns:
+        result that the observation to be classfied
+    """
+    if tree.results != None:
+        return results
+    col = tree.col
+    if observation[col]==None: # empty field in the observation
+        resutl = {}
+        tb,fb = mdclassfy(tree.tb,observation),mdclassfy(tree.fb,observation)
+        tb_count = sum(tb.values)
+        fb_count = sum(fb.values)
+        tb_fraction = tb_count/(tb_count+fb_count)
+        fb_fraction = fb_count/(tb_count+fb_count)  
+        for k,v in tb.items(): results[k]+=v*tb_count
+        for k,v in fb.items(): results[k]+=v*fb_count
+        return result
+    else:
+        value = tree.value
+        if isinstance(value,float) or isinstance(value,int):
+            if observation[col] >= value:
+                return mdclassify(tree.tb,observation)
+            else:
+                reutrn mdclassify(tree.fb,observation)
+        else:
+            if observation[col] == value:
+                return mdclassify(tree.tb,observation)
+            else:
+                return mdclassify(tree.fb,observation)
 
 
+
+    
+    
 if __name__ == '__main__':
     rot = DecisionTreeNode()
     rot = build_tree(sample_data)
