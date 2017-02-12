@@ -4,10 +4,13 @@
 # @Author: WuLC
 # @Date:   2016-12-11 22:04:08
 # @Last modified by:   WuLC
-# @Last Modified time: 2016-12-12 22:50:55
+# @Last Modified time: 2017-02-12 17:28:07
 # @Email: liangchaowu5@gmail.com
+# @Referer: chapter 3 of the book 《programming-collective-intelligence》
 
-# @Referer: chaper 3 of the book 《programming-collective-intelligence》
+############################################################################
+# get data from feedlist and store it in the data file for experiment
+###########################################################################
 
 import os
 import io
@@ -99,6 +102,28 @@ def get_content_from_feedlist(feed_list, data_file):
                     wf.write(('\t'+'0').decode('utf8'))
             wf.write('\n'.decode('utf8'))
 
+
+def read_data(data_file):
+    """read content from the formatted data file
+    
+    Args:
+        data_file (str): path of the formatted data file
+    
+    Returns:
+        TYPE
+    """
+    col_names = None
+    blog_names = []
+    blog_data = []
+    with io.open(data_file, mode = 'r', encoding = 'utf8') as rf:
+        for line in rf:
+            if col_names == None:
+                col_names = line.strip().split('\t')[1:]
+            else:
+                words = line.strip().split('\t')
+                blog_names.append(words[0])
+                blog_data.append([float(x) for x in words[1:]])
+    return col_names, blog_names, blog_data
 
 if __name__ == '__main__':
     feed_list = 'Clustering_data/feedlist.txt'
