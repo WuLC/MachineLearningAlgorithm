@@ -2,7 +2,7 @@
 # @Author: WuLC
 # @Date:   2017-02-12 15:41:09
 # @Last Modified by:   WuLC
-# @Last Modified time: 2017-02-12 23:02:25
+# @Last Modified time: 2017-02-14 23:05:08
 
 from GetData import read_data
 from math import sqrt
@@ -25,31 +25,6 @@ class hcluster:
 		self.distance = distance
 		self.left = left
 		self.right = right
-
-
-def pearson(v1,v2):
-	"""use pearson coeffcient to caculate the distance between two vectors
-	
-	Args:
-	    v1 (list): values of vector1
-	    v2 (list): values of vector2
-	
-	Returns:
-	   (flaot):1 - pearson coeffcient, the smaller, the more similar
-	"""
-	# Simple sums
-	sum1=sum(v1)
-	sum2=sum(v2)
-	# Sums of the squares
-	sum1Sq=sum([pow(v,2) for v in v1])
-	sum2Sq=sum([pow(v,2) for v in v2])
-	# Sum of the products
-	pSum=sum([v1[i]*v2[i] for i in xrange(len(v1))])
-	# Calculate r (Pearson score)
-	num=pSum-(sum1*sum2/len(v1))
-	den=sqrt((sum1Sq-pow(sum1,2)/len(v1))*(sum2Sq-pow(sum2,2)/len(v1)))
-	if den==0: return 0
-	return 1.0-num/den
 
 
 def hierarchicalClustering(blog_data, distance = pearson):
