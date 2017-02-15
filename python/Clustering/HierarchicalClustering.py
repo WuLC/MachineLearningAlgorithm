@@ -2,7 +2,7 @@
 # @Author: WuLC
 # @Date:   2017-02-12 15:41:09
 # @Last Modified by:   WuLC
-# @Last Modified time: 2017-02-14 23:05:08
+# @Last Modified time: 2017-02-15 22:08:57
 
 from GetData import read_data
 from math import sqrt
@@ -92,26 +92,26 @@ def print_cluster(cluster, blog_names, n):
 		print blog_names[cluster.id]
 
 
-def getheight(cluster):
+def get_height(cluster):
     if cluster.left==None and cluster.right==None:  return 1
     # Otherwise the height is the same of the heights of
     # each branch
-    return getheight(cluster.left)+getheight(cluster.right)
+    return get_height(cluster.left)+get_height(cluster.right)
 
 
-def getdepth(cluster):
+def get_depth(cluster):
     # The distance of an endpoint is 0.0
     if cluster.left==None and cluster.right==None: return 0
 
     # The distance of a branch is the greater of its two sides
     # plus its own distance
-    return max(getdepth(cluster.left),getdepth(cluster.right))+cluster.distance
+    return max(get_depth(cluster.left),get_depth(cluster.right))+cluster.distance
 
 
-def drawnode(draw,cluster,x,y,scaling,blog_names):
+def draw_node(draw,cluster,x,y,scaling,blog_names):
     if cluster.id < 0:
-        h1=getheight(cluster.left)*20
-        h2=getheight(cluster.right)*20
+        h1=get_height(cluster.left)*20
+        h2=get_height(cluster.right)*20
         top=y-(h1+h2)/2
         bottom=y+(h1+h2)/2
         # Line length
@@ -126,8 +126,8 @@ def drawnode(draw,cluster,x,y,scaling,blog_names):
         draw.line((x,bottom-h2/2,x+ll,bottom-h2/2),fill=(255,0,0))        
 
         # Call the function to draw the left and right nodes    
-        drawnode(draw,cluster.left,x+ll,top+h1/2,scaling,blog_names)
-        drawnode(draw,cluster.right,x+ll,bottom-h2/2,scaling,blog_names)
+        draw_node(draw,cluster.left,x+ll,top+h1/2,scaling,blog_names)
+        draw_node(draw,cluster.right,x+ll,bottom-h2/2,scaling,blog_names)
     else:   
         # If this is an endpoint, draw the item label
         draw.text((x+5,y-7),blog_names[cluster.id],(0,0,0))
@@ -135,9 +135,9 @@ def drawnode(draw,cluster,x,y,scaling,blog_names):
 
 def draw_cluster(cluster, blog_names, jpeg_path):
     # height and width
-    h=getheight(cluster)*20
+    h=get_height(cluster)*20
     w=1200
-    depth=getdepth(cluster)
+    depth=get_depth(cluster)
 
     # width is fixed, so scale distances accordingly
     scaling=float(w-150)/depth
@@ -149,7 +149,7 @@ def draw_cluster(cluster, blog_names, jpeg_path):
     draw.line((0,h/2,10,h/2),fill=(255,0,0))    
 
     # Draw the first node
-    drawnode(draw,cluster,10,(h/2),scaling,blog_names)
+    draw_node(draw,cluster,10,h/2,scaling,blog_names)
     img.save(jpeg_path,'JPEG')
 
 	
