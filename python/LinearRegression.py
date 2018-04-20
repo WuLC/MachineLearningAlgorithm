@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-# @Author: WuLC
-# @Date:   2016-04-03 13:03:24
-# @Last modified by:   LC
-# @Last Modified time: 2016-04-12 20:48:48
-# @Email: liangchaowu5@gmail.com
-# @Function: linear regression with gradient descent of two methods: batch gradient descent and stochastic gradient descent 
-# @Referer: http://stackoverflow.com/questions/17784587/gradient-descent-using-python-and-numpy
+# Created on Fri Apr 20 2016 17:0:36
+# Author: WuLC
+# EMail: liangchaowu5@gmail.com
 
+
+########################################################################
+# linear regression with batch gradient descent or stochastic gradient descent 
+# compare with SGDClassfier in sklearn
+##########################################################################
 
 from sklearn.linear_model import SGDClassifier
 import numpy as np
@@ -20,22 +21,23 @@ def batchGradientDescent(x,y,theta,alpha):
     @parms theta: weights parameterizing the hypothesis
     @parms alpha: learning rate
     """
-    m,n = np.shape(x)
+    m, n = np.shape(x)
     xTran = x.transpose()
-    convergence = 0.000000001
+    threshold = 0.000000001
     lastCost = 0
     cost = -1    
     recurseCount = 0
-    while abs(lastCost - cost) > convergence: # rcurse until converge
+    while abs(lastCost - cost) > threshold: # rcurse until converge
         lastCost = cost
-        hypothesis = np.dot(x,theta)
+        hypothesis = np.dot(x, theta)
         loss = hypothesis - y
         cost = np.sum(loss**2)/(2*m)
-        gradient = np.dot(xTran,loss)/m
+        gradient = np.dot(xTran, loss)/m
         theta = theta - alpha*gradient
         recurseCount += 1
     return recurseCount,theta
-    
+
+
 def stochasticGradientDescent(x,y,theta,alpha):
     """stochastic gradient descent for linear regression
     
@@ -45,11 +47,11 @@ def stochasticGradientDescent(x,y,theta,alpha):
     @parms alpha: learning rate
     """
     m,n = np.shape(x)
-    convergence = 0.000000001
+    threshold = 0.000000001
     lastCost = 0
     cost = -1    
     recurseCount = 0
-    while abs(lastCost - cost) > convergence: # rcurse until converge
+    while abs(lastCost - cost) > threshold: # rcurse until converge
         lastCost = cost
         hypothesis = np.dot(x,theta)        
         for i in range(m):
@@ -61,7 +63,8 @@ def stochasticGradientDescent(x,y,theta,alpha):
         cost = np.sum((hypothesis-y)**2)/(2*m)
         recurseCount += 1
     return recurseCount,theta
-            
+
+
 def getData(m,bias,variance):
     """
     get sample data for the test
