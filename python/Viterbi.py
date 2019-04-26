@@ -7,7 +7,7 @@
 ###########################################################################################################
 # Viterbi Algorithm for HMM
 # dynamic programming, time complexity O(mn^2), m is the length of sequence of observation, n is the number of hidden states
-# more details can be obtained from: https://tinyurl.com/y8xt2lcf
+# more details can be obtained from: http://wulc.me/2017/03/02/%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/
 ##########################################################################################################
 
 
